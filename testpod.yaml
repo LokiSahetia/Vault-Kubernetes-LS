@@ -1,0 +1,15 @@
+# testpod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testypod
+  annotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: "my-app-role"
+    vault.hashicorp.com/agent-inject-secret-config: kv/my-app/config
+spec:
+  serviceAccountName: my-app-sa
+  containers:
+    - name: alpine
+      image: alpine:latest
+      command: ["sh", "-c", "sleep 3600"]
